@@ -1,24 +1,28 @@
 
-const  mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
 require('dotenv').config();
 
-const MONGO_URL =process.env.MONGO_URL;
+// Update below to match your own MongoDB connection string.
+const MONGO_URL = process.env.MONGO_URL;
 
 mongoose.connection.once('open', () => {
-    console.log('MongoDB Connection is ready!');
+    console.log('MongoDB connection ready!');
 });
+
 mongoose.connection.on('error', (err) => {
     console.error(err);
 });
 
-async function mongoConnect(){
+async function mongoConnect() {
     await mongoose.connect(MONGO_URL);
 }
-async function mogoDisconnect(){
+
+async function mongoDisconnect() {
     await mongoose.disconnect();
 }
-module.exports ={
+
+module.exports = {
     mongoConnect,
-    mogoDisconnect,
+    mongoDisconnect,
 }
